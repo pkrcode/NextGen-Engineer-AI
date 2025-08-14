@@ -1,0 +1,46 @@
+{
+  "name": "adhyayanmarg-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered collaborative productivity and self-reflection platform for students and learners",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "install-server": "npm install",
+    "install-all": "npm run install-server && npm run install-client"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.41.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "firebase-admin": "^13.4.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.0",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.7",
+    "openai": "^4.20.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "time-capsule",
+    "ai",
+    "future-self",
+    "mern",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
