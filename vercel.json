@@ -2,6 +2,10 @@
   "version": 2,
   "builds": [
     {
+      "src": "server/server.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
@@ -12,14 +16,30 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://nextgen-engineer-ai.onrender.com/api/$1"
+      "dest": "server/server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/client/$1"
+      "dest": "client/$1"
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "MONGODB_URI": "@mongodb_uri",
+    "JWT_SECRET": "@jwt_secret",
+    "GOOGLE_AI_API_KEY": "@google_ai_api_key",
+    "OPENAI_API_KEY": "@openai_api_key",
+    "CLOUDINARY_CLOUD_NAME": "@cloudinary_cloud_name",
+    "CLOUDINARY_API_KEY": "@cloudinary_api_key",
+    "CLOUDINARY_API_SECRET": "@cloudinary_api_secret",
+    "EMAIL_HOST": "@email_host",
+    "EMAIL_PORT": "@email_port",
+    "EMAIL_USER": "@email_user",
+    "EMAIL_PASS": "@email_pass"
+  },
+  "functions": {
+    "server/server.js": {
+      "maxDuration": 30
+    }
   }
 }

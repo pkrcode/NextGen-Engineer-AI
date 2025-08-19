@@ -20,6 +20,7 @@ const timeCapsuleRoutes = require('./routes/timeCapsuleRoutes');
 const aiRoutes = require('./routes/aiRoutes');
 const careerRoutes = require('./routes/careerRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
+const learningPathsRoutes = require('./routes/learningPathsRoutes');
 
 // Import services
 const { deliverScheduledMessages } = require('./services/messageDeliveryService');
@@ -61,6 +62,7 @@ app.use('/api/timecapsules', timeCapsuleRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/careers', careerRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/learning-paths', learningPathsRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

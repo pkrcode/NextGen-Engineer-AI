@@ -126,8 +126,8 @@ An AI-powered career guidance, productivity, and collaboration platform designed
 
 6. **Access the Application**
    - Frontend: http://localhost:3000
-   - Backend API: http://localhost:5000
-   - Default admin login: admin@nextgen.com / password123
+   - Backend API: http://localhost:3001
+   - Create your account to get started
 
 ## 📁 Project Structure
 
@@ -165,7 +165,7 @@ Create a `.env` file in the root directory:
 ```env
 # Server Configuration
 NODE_ENV=development
-PORT=5000
+PORT=3001
 CLIENT_URL=http://localhost:3000
 
 # MongoDB
@@ -253,7 +253,7 @@ The platform uses a modern design system inspired by Monolith AI with:
 1. **Connect your repository**
 2. **Set environment variables**
 3. **Build command**: `npm install`
-4. **Start command**: `npm start`
+4. **Start command**: `npm run server`
 
 ### Frontend Deployment (Vercel/Netlify)
 
@@ -288,9 +288,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Email**: support@nextgen.com
-- **Documentation**: [docs.nextgen.com](https://docs.nextgen.com)
 - **Issues**: [GitHub Issues](https://github.com/your-username/nextgen-engineer-ai/issues)
+- **Documentation**: See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) and [AI_SETUP_GUIDE.md](AI_SETUP_GUIDE.md)
 
 ---
 
