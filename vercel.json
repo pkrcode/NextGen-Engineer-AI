@@ -2,10 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "server/server.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
@@ -16,7 +12,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server/server.js"
+      "dest": "https://nextgen-engineer-ai.onrender.com/api/$1"
     },
     {
       "src": "/(.*)",
