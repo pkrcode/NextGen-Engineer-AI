@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "codebattle-timecapsule",
   "builds": [
     {
       "src": "server/server.js",
@@ -17,19 +16,14 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "server/server.js"
+      "dest": "/server/server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "client/$1"
+      "dest": "/client/$1"
     }
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "server/server.js": {
-      "maxDuration": 30
-    }
   }
 }

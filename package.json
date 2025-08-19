@@ -1,8 +1,8 @@
 {
-  "name": "adhyayanmarg-platform",
+  "name": "nextgen-engineer-ai",
   "version": "1.0.0",
   "private": true,
-  "description": "AI-powered collaborative productivity and self-reflection platform for students and learners",
+  "description": "AI-powered career guidance, productivity, and collaboration platform for engineering students",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -12,35 +12,39 @@
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "install-server": "npm install",
-    "install-all": "npm run install-server && npm run install-client"
+    "install-all": "npm run install-server && npm run install-client",
+    "seed": "node server/scripts/seedData.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.41.0",
+    "cloudinary": "^1.41.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.6.1",
     "express": "^4.18.2",
-    "firebase-admin": "^13.4.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.0",
+    "mongoose": "^8.17.1",
     "multer": "^1.4.5-lts.1",
     "node-cron": "^3.0.3",
-    "nodemailer": "^6.9.7",
-    "openai": "^4.20.0"
+    "nodemailer": "^6.10.1",
+    "openai": "^4.104.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
     "nodemon": "^3.0.1"
   },
   "keywords": [
-    "time-capsule",
+    "engineering",
+    "career-guidance",
     "ai",
-    "future-self",
+    "collaboration",
     "mern",
     "react",
     "nodejs",
-    "mongodb"
+    "mongodb",
+    "socketio"
   ],
-  "author": "Your Name",
+  "author": "NextGen Engineer AI Team",
   "license": "MIT"
 }
