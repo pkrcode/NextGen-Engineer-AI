@@ -66,9 +66,12 @@ server/serviceAccountKey.json
 serviceAccountKey*.json
 
 # Google Cloud credentials
-*.json
-!package.json
-!package-lock.json
-!tsconfig.json
-!tailwind.config.js
-!postcss.config.js
+*.serviceAccountKey.json
+serviceAccountKey*.json
+
+# Sensitive configuration files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
