@@ -10,7 +10,7 @@ const deliverScheduledMessages = async () => {
     console.log('🕐 Starting scheduled message delivery...');
     
     // Find all pending deliveries
-    const pendingDeliveries = await TimeCapsule.findPendingDeliveries();
+    const pendingDeliveries = await TimeCapsule.getReadyForDelivery();
     
     console.log(`📬 Found ${pendingDeliveries.length} messages to deliver`);
     
@@ -98,7 +98,7 @@ const generateDeliveryEmailContent = (timeCapsule) => {
     day: 'numeric'
   });
   
-  const scheduledDate = new Date(timeCapsule.scheduledDate).toLocaleDateString('en-US', {
+  const scheduledDate = new Date(timeCapsule.deliveryDate).toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -133,7 +133,7 @@ const generateDeliveryEmailContent = (timeCapsule) => {
           
           <div class="message-box">
             <h3>${timeCapsule.title}</h3>
-            <p>${timeCapsule.message}</p>
+            <p>${timeCapsule.content}</p>
             ${timeCapsule.mediaUrl ? `<p><strong>Media:</strong> <a href="${timeCapsule.mediaUrl}" target="_blank">View attached media</a></p>` : ''}
           </div>
           
@@ -164,7 +164,7 @@ Hello from your past self!
 This message was scheduled for ${scheduledDate} and has now been delivered to you.
 
 Title: ${timeCapsule.title}
-Message: ${timeCapsule.message}
+Message: ${timeCapsule.content}
 Category: ${timeCapsule.category}
 Priority: ${timeCapsule.priority}
 ${timeCapsule.tags.length > 0 ? `Tags: ${timeCapsule.tags.join(', ')}` : ''}

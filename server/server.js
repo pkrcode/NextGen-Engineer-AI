@@ -28,16 +28,32 @@ const { setupSocketIO } = require('./services/socketService');
 
 const app = express();
 const server = createServer(app);
+const allowedOrigins = [
+  process.env.CLIENT_URL || "http://localhost:3000",
+  "http://localhost:3001"
+];
+
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
-    methods: ["GET", "POST"]
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    },
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:3000",
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 app.use(express.json({ limit: '50mb' }));
@@ -63,6 +79,29 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/careers', careerRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/learning-paths', learningPathsRoutes);
+
+// API root endpoint
+app.get('/api', (req, res) => {
+  res.json({
+    name: 'NextGen Engineer AI API',
+    status: 'ok',
+    version: '1.0.0',
+    health: '/api/health',
+    endpoints: [
+      '/api/auth',
+      '/api/workspaces',
+      '/api/tasks',
+      '/api/roadmaps',
+      '/api/chat',
+      '/api/gamification',
+      '/api/timecapsules',
+      '/api/ai',
+      '/api/careers',
+      '/api/upload',
+      '/api/learning-paths'
+    ]
+  });
+});
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
