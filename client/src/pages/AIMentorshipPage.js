@@ -9,18 +9,7 @@ export default function AIMentorshipPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
-  const ask = async () => {Request ID: 9a54b26c-dd01-4c68-8fc5-20795e27602a
-ConnectError: [aborted] read ECONNRESET
-    at nol.$endAiConnectTransportReportError (vscode-file://vscode-app/c:/Users/Praveen%20Kumar/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:4814:319459)
-    at egr._doInvokeHandler (vscode-file://vscode-app/c:/Users/Praveen%20Kumar/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:211942)
-    at egr._invokeHandler (vscode-file://vscode-app/c:/Users/Praveen%20Kumar/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:211684)
-    at egr._receiveRequest (vscode-file://vscode-app/c:/Users/Praveen%20Kumar/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:210449)
-    at egr._receiveOneMessage (vscode-file://vscode-app/c:/Users/Praveen%20Kumar/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:209271)
-    at O_t.value (vscode-file://vscode-app/c:/Users/Praveen%20Kumar/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:488:207365)
-    at ye._deliver (vscode-file://vscode-app/c:/Users/Praveen%20Kumar/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:49:2962)
-    at ye.fire (vscode-file://vscode-app/c:/Users/Praveen%20Kumar/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:49:3283)
-    at Prt.fire (vscode-file://vscode-app/c:/Users/Praveen%20Kumar/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:4801:12154)
-    at MessagePort.<anonymous> (vscode-file://vscode-app/c:/Users/Praveen%20Kumar/AppData/Local/Programs/cursor/resources/app/out/vs/workbench/workbench.desktop.main.js:6983:18168)
+  const ask = async () => {
     if (!text.trim()) return;
     setLoading(true);
     setResult(null);
