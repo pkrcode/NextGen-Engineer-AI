@@ -24,17 +24,6 @@
     }
   ],
   "env": {
-    "NODE_ENV": "production",
-    "MONGODB_URI": "@mongodb_uri",
-    "JWT_SECRET": "@jwt_secret",
-    "GOOGLE_AI_API_KEY": "@google_ai_api_key",
-    "OPENAI_API_KEY": "@openai_api_key",
-    "CLOUDINARY_CLOUD_NAME": "@cloudinary_cloud_name",
-    "CLOUDINARY_API_KEY": "@cloudinary_api_key",
-    "CLOUDINARY_API_SECRET": "@cloudinary_api_secret",
-    "EMAIL_HOST": "@email_host",
-    "EMAIL_PORT": "@email_port",
-    "EMAIL_USER": "@email_user",
-    "EMAIL_PASS": "@email_pass"
+    "NODE_ENV": "production"
   }
 }
