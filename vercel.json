@@ -36,10 +36,5 @@
     "EMAIL_PORT": "@email_port",
     "EMAIL_USER": "@email_user",
     "EMAIL_PASS": "@email_pass"
-  },
-  "functions": {
-    "server/server.js": {
-      "maxDuration": 30
-    }
   }
 }
