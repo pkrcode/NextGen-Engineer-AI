@@ -6,33 +6,38 @@ import api from '../services/api';
 import { mockDomains, mockRoles } from '../data/mockCareer';
 
 export default function CareerExplorerPage() {
-	const [domains, setDomains] = useState([]);
-	const [roles, setRoles] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [domains, setDomains] = useState(mockDomains); // Start with mock data
+	const [roles, setRoles] = useState(mockRoles); // Start with mock data
+	const [loading, setLoading] = useState(false); // Start with false since we have mock data
 	const [selectedDomain, setSelectedDomain] = useState('');
 	const [query, setQuery] = useState('');
+	const [apiLoaded, setApiLoaded] = useState(false);
 	const navigate = useNavigate();
 	const hasToastedRef = useRef(false);
 
 	useEffect(() => {
+		// Load API data in background without blocking UI
 		(async () => {
 			try {
 				const [dRes, rRes] = await Promise.all([
 					api.get('/careers/domains'),
 					api.get('/careers/roles')
 				]);
-				setDomains(dRes.data || mockDomains);
-				setRoles(rRes.data || mockRoles);
-			} catch (e) {
-				// API offline → show demo data (show toast once; guard StrictMode double-invoke)
-				setDomains(mockDomains);
-				setRoles(mockRoles);
-				if (!hasToastedRef.current) {
-					hasToastedRef.current = true;
-					toast('Showing demo careers (API offline)', { icon: 'ℹ️' });
+				// Only update if we got real data
+				if (dRes.data && dRes.data.length > 0) {
+					setDomains(dRes.data);
 				}
-			} finally {
-				setLoading(false);
+				if (rRes.data && rRes.data.length > 0) {
+					setRoles(rRes.data);
+					setApiLoaded(true);
+					if (!hasToastedRef.current) {
+						hasToastedRef.current = true;
+						toast('Loaded live career data', { icon: '✅' });
+					}
+				}
+			} catch (e) {
+				// API offline → keep using mock data (no toast needed since we start with mock)
+				console.log('API offline, using mock data');
 			}
 		})();
 	}, []);
@@ -40,11 +45,23 @@ export default function CareerExplorerPage() {
 	const filter = async (domain, q) => {
 		setLoading(true);
 		try {
-			const res = await api.get('/careers/roles', { params: { domain: domain || undefined, q: q || undefined } });
-			setRoles(res.data || []);
+			if (apiLoaded) {
+				// Use API if available
+				const res = await api.get('/careers/roles', { params: { domain: domain || undefined, q: q || undefined } });
+				setRoles(res.data || []);
+			} else {
+				// Use client-side filtering with current data
+				const base = roles;
+				const needle = (q || '').toLowerCase();
+				const filtered = base.filter(r =>
+					(!domain || r.domain === domain) &&
+					(!needle || (r.title + r.domain + (r.lead || '') + (r.description || '')).toLowerCase().includes(needle))
+				);
+				setRoles(filtered);
+			}
 		} catch (e) {
-			// client-side demo filtering
-			const base = mockRoles;
+			// Fallback to client-side filtering
+			const base = roles;
 			const needle = (q || '').toLowerCase();
 			const filtered = base.filter(r =>
 				(!domain || r.domain === domain) &&
@@ -65,9 +82,15 @@ export default function CareerExplorerPage() {
 						<h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
 							Explore Career Paths
 						</h1>
-						<p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+						<p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-2">
 							Discover high-demand roles, core skills, and typical salary ranges in the engineering world.
 						</p>
+						<div className="flex items-center justify-center gap-2">
+							<div className={`w-2 h-2 rounded-full ${apiLoaded ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
+							<span className="text-sm text-gray-500 dark:text-gray-400">
+								{apiLoaded ? 'Live data' : 'Demo data'}
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>
