@@ -36,8 +36,26 @@ export default function AIMentorshipPage() {
     try {
       const res = await aiAPI.enhanceMessage({ message: text, context: 'career guidance', tone: 'helpful', length: 'medium' });
       setResult(res.data?.data || null);
+      
+      // Save to recent activity
+      const activity = JSON.parse(localStorage.getItem('recentActivity') || '[]');
+      activity.unshift(text);
+      localStorage.setItem('recentActivity', JSON.stringify(activity.slice(0, 10))); // Keep last 10
+      setRecentActivity(activity.slice(0, 3));
     } catch (e) {
-      toast.error('AI request failed');
+      console.error('AI request failed:', e);
+      // Provide fallback response
+      setResult({
+        enhanced: `Based on your question "${text}", here are some insights:\n\n• Focus on building practical skills in your chosen field\n• Network with professionals in your industry\n• Consider taking relevant certifications\n• Stay updated with latest trends and technologies\n• Practice problem-solving through projects`,
+        suggestions: [
+          "Research specific companies you're interested in",
+          "Build a portfolio showcasing your skills",
+          "Join professional communities and forums",
+          "Consider mentorship opportunities"
+        ],
+        sentiment: "positive"
+      });
+      toast('Using fallback response (AI service unavailable)', { icon: 'ℹ️' });
     } finally {
       setLoading(false);
     }

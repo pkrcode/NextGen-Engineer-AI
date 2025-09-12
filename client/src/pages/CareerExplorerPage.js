@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { Search, Filter, TrendingUp, Users, Zap } from 'lucide-react';
 import api from '../services/api';
 import { mockDomains, mockRoles } from '../data/mockCareer';
+import BackBar from '../components/BackBar';
 
 export default function CareerExplorerPage() {
 	const [domains, setDomains] = useState(mockDomains); // Start with mock data
@@ -78,6 +79,7 @@ export default function CareerExplorerPage() {
 			{/* Header Section */}
 			<div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+					<BackBar title="Explore Career Paths" />
 					<div className="text-center animate-fade-in">
 						<h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
 							Explore Career Paths

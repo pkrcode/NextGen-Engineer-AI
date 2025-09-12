@@ -5,8 +5,8 @@ const { enhanceMessage, generateAvatarVoice, analyzeSentiment } = require('../se
 
 // @route   POST /api/ai/enhance-message
 // @desc    Enhance a message using AI
-// @access  Private
-router.post('/enhance-message', auth, async (req, res) => {
+// @access  Public (for demo purposes)
+router.post('/enhance-message', async (req, res) => {
   try {
     const { message, context, tone, length } = req.body;
     
@@ -69,8 +69,8 @@ router.post('/generate-avatar', auth, async (req, res) => {
 
 // @route   POST /api/ai/analyze-sentiment
 // @desc    Analyze message sentiment
-// @access  Private
-router.post('/analyze-sentiment', auth, async (req, res) => {
+// @access  Public (for demo purposes)
+router.post('/analyze-sentiment', async (req, res) => {
   try {
     const { message } = req.body;
     

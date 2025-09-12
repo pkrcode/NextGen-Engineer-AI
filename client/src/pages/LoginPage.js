@@ -17,8 +17,12 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      await login(email, password);
-      navigate('/dashboard');
+      const result = await login({ email, password });
+      if (result.success) {
+        navigate('/dashboard');
+      } else {
+        setError(result.error || 'Failed to log in.');
+      }
     } catch (err) {
       setError(err.message || 'Failed to log in.');
     } finally {

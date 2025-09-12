@@ -11,7 +11,7 @@ export default function SignupPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { signup } = useAuth(); // Use the signup function from context
+  const { register } = useAuth(); // Use the register function from context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,8 +23,12 @@ export default function SignupPage() {
         return;
     }
     try {
-      await signup(email, password, username);
-      navigate('/dashboard');
+      const result = await register({ email, password, username });
+      if (result.success) {
+        navigate('/login');
+      } else {
+        setError(result.error || 'Failed to sign up.');
+      }
     } catch (err) {
       setError(err.message || 'Failed to sign up.');
     } finally {
